@@ -1,9 +1,15 @@
+package client;
+
+import server.User;
+import client.CRClient;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
+import server.CRServer;
+import view.FrmLogin;
 
 @SuppressWarnings("serial")
 public class Client extends UnicastRemoteObject implements CRClient {
@@ -17,11 +23,11 @@ public class Client extends UnicastRemoteObject implements CRClient {
 			try {
 				String login = JOptionPane.showInputDialog(null, "Poe seu nick ai");
 				registry.rebind("login", new Client());
-				Player player = new Player();
-				player.setLogin(login);
-				conn.connect(player);
-				conn.sendMessage(player, JOptionPane.showInputDialog(null, "Digite uma mensagem"));
-				conn.disconnect(player);
+				User user = new User();
+                                user.setLogin(login);
+				conn.connect(user);
+				conn.sendMessage(user, JOptionPane.showInputDialog(null, "Digite uma mensagem"));
+				conn.disconnect(user);
 			} catch (Exception e) {
 				System.out.println("Erro: " + e.getMessage());
 				e.printStackTrace();
