@@ -37,14 +37,16 @@ public class FrmLogin extends javax.swing.JFrame {
         setBackground(new java.awt.Color(224, 246, 202));
         setForeground(java.awt.Color.green);
 
-        jPanel1.setBackground(new java.awt.Color(224, 246, 202));
+        jPanel1.setBackground(new java.awt.Color(66, 69, 73));
 
         lblNome.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
         lblNome.setText("Digite seu nome:");
 
         jScrollPane1.setViewportView(txtNome);
 
-        btnLogin.setBackground(new java.awt.Color(89, 206, 114));
+        btnLogin.setBackground(new java.awt.Color(114, 137, 218));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,7 +55,7 @@ public class FrmLogin extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Algerian", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(33, 92, 84));
+        jLabel2.setForeground(new java.awt.Color(114, 137, 218));
         jLabel2.setText("<html> CHAT RMI  <br/>Takas e Sara </html>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
