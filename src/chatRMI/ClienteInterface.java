@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface ClienteInterface extends Remote {
 
-    void receiveMessage(String message) throws RemoteException;
+    void receberMensagem(String menssagem) throws RemoteException;
 
     void updateUserList(ArrayList<String> users) throws RemoteException;
 }

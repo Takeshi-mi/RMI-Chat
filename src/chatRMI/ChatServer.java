@@ -14,9 +14,21 @@ public class ChatServer extends UnicastRemoteObject implements ServerInterface {
     }
 
     public void startServer() {
-        isRunning = true;
-        System.out.println("Servidor iniciado");
+       
+        try {
+            LocateRegistry.createRegistry(1099);
+            ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(this, 0);
+            Registry registry = LocateRegistry.getRegistry();
+            registry.rebind("ServerInterface", stub);
+
+            System.out.println("Servidor pronto...");
+
+            // Implemente um loop para aguardar comandos, como iniciar/parar o servidor
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
 
     public void stopServer() {
         isRunning = false;

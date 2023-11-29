@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package chatRMI;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
-/**
- *
- * @author Takeshi
- */
-public class Cliente {
-    
+public class Cliente extends UnicastRemoteObject implements ClienteInterface {
+
+    public Cliente() throws RemoteException {
+        super();
+    }
+
+    @Override
+    public void receberMensagem(String menssagem) throws RemoteException {
+        // 
+    }
+ 
+    @Override
+    public void updateUserList(ArrayList<String> users) throws RemoteException {
+        // 
+    }
 }
