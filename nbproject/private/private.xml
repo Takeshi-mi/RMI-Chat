@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/CRServer.java</file>
-            <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/chatRMI/Player.java</file>
             <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/view/FrmLogin.java</file>
-            <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/chatRMI/Cliente.java</file>
             <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/view/FrmChatInterface.java</file>
+            <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/view/FrmServidor.java</file>
             <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/Server.java</file>
             <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/chatRMI/Client.java</file>
-            <file>file:/C:/Users/alexa/OneDrive/Documentos/NetBeansProjects/ChatDistribuidoRMI/src/chatRMI/CRClient.java</file>
         </group>
     </open-files>
 </project-private>
