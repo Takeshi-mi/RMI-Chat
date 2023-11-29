@@ -1,7 +1,10 @@
+package server;
+
+import client.CRClient;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Player implements Serializable {
+public class User implements Serializable {
 	private String nome;
 	private String login;
 	

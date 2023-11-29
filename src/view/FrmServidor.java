@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-import chatRMI.ChatServer;
+import client.*;
+import server.*;
 import java.rmi.RemoteException;
 /**
  *
@@ -146,11 +147,11 @@ public class FrmServidor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPararServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPararServidorActionPerformed
-       servidor.stopServer();
+      // servidor.stopServer();
     }//GEN-LAST:event_btnPararServidorActionPerformed
 
     private void btnIniciarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarServidorActionPerformed
-        servidor.startSever();
+       // servidor.startSever();
     }//GEN-LAST:event_btnIniciarServidorActionPerformed
 
     /**

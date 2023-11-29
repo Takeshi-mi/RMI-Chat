@@ -1,3 +1,6 @@
+package server;
+
+import client.CRClient;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -9,14 +12,14 @@ import java.rmi.registry.LocateRegistry;
 
 @SuppressWarnings("serial")
 public class Server extends UnicastRemoteObject implements CRServer {
-	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<User> users = new ArrayList<User>();
 	
 	public Server() throws RemoteException {super();} 
 
 	public static void main(String args[]) {
 		try {
                         Registry registry = LocateRegistry.createRegistry(1099);
-			registry.rebind("Server1", new Server());
+			Naming.rebind("Server1", new Server());
 			System.out.println("Servidor Iniciado");
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
@@ -25,28 +28,28 @@ public class Server extends UnicastRemoteObject implements CRServer {
 	}
 
 	@Override
-	public void sendMessage(Player player, String msg) throws RemoteException {
-		for(Player playerX : players) {
-			playerX.getConn().receiveMessage(player.getLogin() + " diz: " + msg);
+	public void sendMessage(User user, String msg) throws RemoteException {
+		for(User userX : users) {
+			userX.getConn().receiveMessage(user.getLogin() + " diz: " + msg);
 		}
 	}
 	
 	@Override
-	public void connect(Player player) throws RemoteException {
-		players.add(player);
+	public void connect(User user) throws RemoteException {
+		users.add(user);
 		try {
-			player.setConn((CRClient) Naming.lookup("//127.0.0.1/" + player.getLogin()));
+			user.setConn((CRClient) Naming.lookup("//127.0.0.1/" + user.getLogin()));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Player conectou: " + player.getLogin());
+		System.out.println("Ususário conectou: " + user.getLogin());
 	}
 
 	@Override
-	public void disconnect(Player player) throws RemoteException {
-		players.remove(player);
-		System.out.println("Player desconectou: " + player.getLogin());
+	public void disconnect(User user) throws RemoteException {
+		users.remove(user);
+		System.out.println("Ususário desconectou: " + user.getLogin());
 	}
 }

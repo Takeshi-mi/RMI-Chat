@@ -10,6 +10,7 @@ package view;
  */
 public class FrmLogin extends javax.swing.JFrame {
 
+
     /**
      * Creates new form login
      */
@@ -28,11 +29,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtNome = new javax.swing.JTextPane();
         btnLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         iconLogo = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(224, 246, 202));
@@ -44,8 +44,6 @@ public class FrmLogin extends javax.swing.JFrame {
         lblNome.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblNome.setForeground(new java.awt.Color(255, 255, 255));
         lblNome.setText("Nickname:");
-
-        jScrollPane1.setViewportView(txtNome);
 
         btnLogin.setBackground(new java.awt.Color(114, 137, 218));
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,22 +65,16 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnLogin))
-                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(iconLogo)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnLogin))
+                        .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iconLogo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(73, 73, 73))
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,10 +87,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin))
-                .addGap(29, 29, 29))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,8 +158,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel iconLogo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JTextPane txtNome;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
