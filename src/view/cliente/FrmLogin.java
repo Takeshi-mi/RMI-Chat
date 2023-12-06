@@ -38,7 +38,7 @@ public class FrmLogin extends javax.swing.JFrame {
         setForeground(java.awt.Color.green);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(66, 69, 73));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
 
         lblNome.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblNome.setForeground(new java.awt.Color(255, 255, 255));

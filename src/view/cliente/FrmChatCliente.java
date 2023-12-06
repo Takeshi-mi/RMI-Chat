@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmChatCliente extends javax.swing.JFrame {
 class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
-        private static final long serialVersionUID = 1L;
+      
         
         ClientListener() throws RemoteException {
         }
@@ -68,8 +68,10 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
 
     private void atualizarLista() {
         try {
+            // JList é um componente gráfico. 
             List<InterfaceCliente> clientes = chat.getClientes();
-            DefaultListModel<String> model = new DefaultListModel<>();
+            DefaultListModel<String> model = new DefaultListModel<>(); //cria uma lista em branco. Eu poderia usar removeAllElemnts
+            //model.removeAllElements();
             List<String> nomesClientes = new ArrayList<>();
 
             for (InterfaceCliente cliente : clientes) {
@@ -77,7 +79,7 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
             }
 
             model.addAll(nomesClientes);
-            listOnline.setModel(model);
+            listOnlineUsers.setModel(model);
         } catch (RemoteException e) {
             e.printStackTrace();
             // Tratamento de erro ao atualizar lista de clientes
@@ -102,7 +104,7 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
         jLabel3 = new javax.swing.JLabel();
         btnDesconectar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listOnline = new javax.swing.JList<>();
+        listOnlineUsers = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,6 +112,7 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
         jPanel1.setBackground(new java.awt.Color(114, 137, 218));
         jPanel1.setToolTipText("");
 
+        txtBatePapo.setEditable(false);
         txtBatePapo.setColumns(20);
         txtBatePapo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtBatePapo.setRows(5);
@@ -163,6 +166,8 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Grupo Família IFG");
 
+        btnDesconectar.setBackground(new java.awt.Color(255, 0, 51));
+        btnDesconectar.setForeground(new java.awt.Color(255, 255, 255));
         btnDesconectar.setText("Desconectar");
         btnDesconectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +196,7 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane2.setViewportView(listOnline);
+        jScrollPane2.setViewportView(listOnlineUsers);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setForeground(new java.awt.Color(51, 204, 0));
@@ -311,7 +316,7 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblNomeUser;
-    private javax.swing.JList<String> listOnline;
+    private javax.swing.JList<String> listOnlineUsers;
     private javax.swing.JTextArea txtBatePapo;
     private javax.swing.JTextArea txtMensagem;
     // End of variables declaration//GEN-END:variables
