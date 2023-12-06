@@ -16,4 +16,5 @@ public interface InterfaceChat extends Remote {//Define a interface extendendo a
     void desconectarCliente(InterfaceCliente listener) throws RemoteException;
     void enviarMensagem(String remetente, String mensagem) throws RemoteException;
     List<InterfaceCliente> getClientes() throws RemoteException;
+    public String getAllMsg() throws RemoteException;
 }

@@ -16,7 +16,15 @@ public class ServidorChat extends UnicastRemoteObject implements InterfaceChat {
         clientes = new ArrayList<>();
       
     }
-
+    @Override
+       public String getAllMsg() throws RemoteException {
+           StringBuilder sb = new StringBuilder();
+           for (String msg : messageLog) {
+               sb.append(msg);
+               sb.append("\n");
+           }
+           return sb.toString();
+       }
     @Override
     public void registrarCliente(InterfaceCliente cliente, String nome) throws RemoteException {
         clientes.add(cliente);
@@ -31,7 +39,9 @@ public class ServidorChat extends UnicastRemoteObject implements InterfaceChat {
     }
     @Override
     public void desconectarCliente(InterfaceCliente listener) throws RemoteException {
-        // Implementar a desconexão do cliente no servidor
+        clientes.remove(listener);
+        notifyAtualizarClientes();
+        enviarMensagem("Aviso:", listener+" saiu do chat!");
     }
 
     @Override

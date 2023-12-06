@@ -13,19 +13,46 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Takeshi
  */
-public class FrmChatGUI extends javax.swing.JFrame {
+public class FrmChatCliente extends javax.swing.JFrame {
+class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
+        private static final long serialVersionUID = 1L;
+        
+        ClientListener() throws RemoteException {
+        }
+        
+        @Override
+        public void notificar(String msg) throws RemoteException {
+            String textoAntigo = txtBatePapo.getText();
+            txtBatePapo.setText(textoAntigo+"\n"+msg);
+            System.out.println("entrou no notificar");
+        }
 
+        @Override
+        public void atualizarClientes() throws RemoteException {
+            atualizarLista();
+        }
+
+        @Override
+        public String getNome() throws RemoteException {
+            return nome;
+        }
+    }
     private String nomeCliente;
     private InterfaceChat chat;
     private static Registry registro;
     private String nome;
-    InterfaceCliente user;
-
-    public FrmChatGUI(String nomeCliente, InterfaceChat chat) {
+    //InterfaceCliente user;
+    ClientListener user;
+    
+    public FrmChatCliente(String nomeCliente, InterfaceChat chat) {
         initComponents();
         this.nomeCliente = nomeCliente;
         this.chat = chat;
@@ -40,14 +67,17 @@ public class FrmChatGUI extends javax.swing.JFrame {
             if (!mensagem.isEmpty()) {
                 chat.enviarMensagem(nomeCliente, mensagem);
                 txtMensagem.setText(""); // Limpar campo de mensagem após o envio
+               // user.notificar(mensagem);
+                System.out.println(nomeCliente+ mensagem);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
             // Tratamento de erro ao enviar mensagem
         }
     }
+     
 
-    private void atualizarListaClientes() {
+    private void atualizarLista() {
         try {
             List<InterfaceCliente> clientes = chat.getClientes();
             DefaultListModel<String> model = new DefaultListModel<>();
@@ -66,8 +96,6 @@ public class FrmChatGUI extends javax.swing.JFrame {
     }
 
 
-    // Métodos para enviar mensagens, atualizar a lista de clientes, etc.
-    // ...
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,7 +108,7 @@ public class FrmChatGUI extends javax.swing.JFrame {
         lblNomeUser = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtMensagem = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnEnvia = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnDesconectar = new javax.swing.JButton();
@@ -88,7 +116,7 @@ public class FrmChatGUI extends javax.swing.JFrame {
         listOnline = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(114, 137, 218));
         jPanel1.setToolTipText("");
@@ -115,7 +143,7 @@ public class FrmChatGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNomeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,13 +159,13 @@ public class FrmChatGUI extends javax.swing.JFrame {
         txtMensagem.setRows(5);
         jScrollPane3.setViewportView(txtMensagem);
 
-        jButton1.setBackground(new java.awt.Color(114, 137, 218));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/send.png"))); // NOI18N
-        jButton1.setToolTipText("");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEnvia.setBackground(new java.awt.Color(114, 137, 218));
+        btnEnvia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/send.png"))); // NOI18N
+        btnEnvia.setToolTipText("");
+        btnEnvia.setBorder(null);
+        btnEnvia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEnviaActionPerformed(evt);
             }
         });
 
@@ -174,11 +202,6 @@ public class FrmChatGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        listOnline.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(listOnline);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -199,10 +222,10 @@ public class FrmChatGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(3, 3, 3))
+                        .addComponent(btnEnvia)
+                        .addGap(221, 221, 221))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(3, 3, 3))
@@ -224,7 +247,7 @@ public class FrmChatGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnEnvia))
                 .addGap(2, 2, 2))
         );
 
@@ -232,7 +255,7 @@ public class FrmChatGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -245,17 +268,20 @@ public class FrmChatGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnEnviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviaActionPerformed
+        enviarMensagem();
+        
+    }//GEN-LAST:event_btnEnviaActionPerformed
 
     private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
          desconectarCliente();
+         
     }//GEN-LAST:event_btnDesconectarActionPerformed
     private void desconectarCliente() {
         try {
             chat.desconectarCliente(user);
             this.dispose();
+            System.out.println("O cliente "+user+" se desconectou.");
 
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -268,14 +294,14 @@ public class FrmChatGUI extends javax.swing.JFrame {
    public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new FrmChatGUI("", null).setVisible(true);
+            new FrmChatCliente("", null).setVisible(true);
  
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDesconectar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnEnvia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

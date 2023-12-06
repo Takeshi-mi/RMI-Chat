@@ -33,7 +33,7 @@ public class FrmLogin extends javax.swing.JFrame {
         iconLogo = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(224, 246, 202));
         setForeground(java.awt.Color.green);
         setResizable(false);
@@ -132,7 +132,7 @@ public class FrmLogin extends javax.swing.JFrame {
             nomeCliente = nome;
 
             // Abrir a próxima tela (FrmChatGUI)
-            FrmChatGUI chatGUI = new FrmChatGUI(nomeCliente, chat);
+            FrmChatCliente chatGUI = new FrmChatCliente(nomeCliente, chat);
             chatGUI.setVisible(true);
 
             // Fechar a tela de login

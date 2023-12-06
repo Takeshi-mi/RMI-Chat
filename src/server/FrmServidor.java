@@ -149,7 +149,12 @@ public class FrmServidor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPararServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPararServidorActionPerformed
-    
+        try{
+            UnicastRemoteObject.unexportObject(objetoRemoto, true);
+            System.out.println("Servidor RMI encerrado.");
+            System.exit(0);
+        }catch(RemoteException e){
+            e.printStackTrace();}
     }//GEN-LAST:event_btnPararServidorActionPerformed
 
     private void btnIniciarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarServidorActionPerformed
@@ -180,21 +185,12 @@ public class FrmServidor extends javax.swing.JFrame {
             System.out.println(registro.toString());
              FrmLogin loginGUI = new FrmLogin();
              loginGUI.setVisible(true);
+             FrmLogin loginGUI2 = new FrmLogin();
+             loginGUI2.setVisible(true);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     
-
-       
-       /* try {
-           // objetoRemoto = new ServidorChat();
-            Registry registro = LocateRegistry.createRegistry(1099); // Cria um registro na porta 1099
-            lblMsgPorta.setText("Servidor inicializado na porta 1099");
-            registro.rebind("MeuObjetoRemoto", objetoRemoto); // Registra o objeto remoto no registro
-            System.out.println("Servidor RMI pronto.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }//GEN-LAST:event_btnIniciarServidorActionPerformed
 
     /**
