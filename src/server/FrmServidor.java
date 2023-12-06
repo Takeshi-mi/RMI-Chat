@@ -22,6 +22,7 @@ public class FrmServidor extends javax.swing.JFrame {
     public FrmServidor() {
         initComponents();
         btnPararServidor.setEnabled(false);
+         btnNovoLogin.setEnabled(false);
     }
 
     /**
@@ -41,6 +42,7 @@ public class FrmServidor extends javax.swing.JFrame {
         lblConexao = new javax.swing.JLabel();
         lblPorta = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        btnNovoLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +79,15 @@ public class FrmServidor extends javax.swing.JFrame {
         lblPorta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPorta.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnNovoLogin.setBackground(new java.awt.Color(114, 137, 218));
+        btnNovoLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnNovoLogin.setText("Novo Login");
+        btnNovoLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,12 +112,17 @@ public class FrmServidor extends javax.swing.JFrame {
                         .addComponent(lblPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(iconLogo)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(iconLogo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(btnNovoLogin)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,8 +130,10 @@ public class FrmServidor extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNovoLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(iconLogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPararServidor)
                     .addComponent(btnIniciarServidor))
@@ -161,6 +179,7 @@ public class FrmServidor extends javax.swing.JFrame {
        // Desativa o botão de iniciar e ativa o botão de parar
         btnIniciarServidor.setEnabled(false);
         btnPararServidor.setEnabled(true);
+        btnNovoLogin.setEnabled(true);
        // realiza a criação no Objeto remoto, registra e inicializa o servidor
         try {
             // Iniciar o registro RMI na porta 1099
@@ -187,11 +206,17 @@ public class FrmServidor extends javax.swing.JFrame {
              loginGUI.setVisible(true);
              FrmLogin loginGUI2 = new FrmLogin();
              loginGUI2.setVisible(true);
+             loginGUI2.setLocation(1000, 200);
+             loginGUI.setLocation(600, 200);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     
     }//GEN-LAST:event_btnIniciarServidorActionPerformed
+
+    private void btnNovoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLoginActionPerformed
+        new FrmLogin().setVisible(true);
+    }//GEN-LAST:event_btnNovoLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,6 +255,7 @@ public class FrmServidor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarServidor;
+    private javax.swing.JButton btnNovoLogin;
     private javax.swing.JButton btnPararServidor;
     private javax.swing.JLabel iconLogo;
     private javax.swing.JLabel jLabel2;

@@ -4,6 +4,8 @@
  */
 package chatrmi;
 
+import server.FrmServidor;
+
 /**
  *
  * @author Takeshi
@@ -14,7 +16,8 @@ public class ChatRMI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+            FrmServidor server = new FrmServidor();
+            server.setVisible(true);
     }
     
 }

@@ -42,40 +42,29 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
 
         @Override
         public String getNome() throws RemoteException {
-            return nome;
+            return nomeCliente;
         }
     }
     private String nomeCliente;
     private InterfaceChat chat;
     private static Registry registro;
-    private String nome;
-    //InterfaceCliente user;
-    ClientListener user;
+    private InterfaceCliente userIF;
+//    ClientListener user;;;
     
     public FrmChatCliente(String nomeCliente, InterfaceChat chat) {
         initComponents();
         this.nomeCliente = nomeCliente;
         this.chat = chat;
+        try {
+            userIF = (InterfaceCliente) new ClientListener(); //castando para interface
+            chat.registrarCliente(userIF, this.nomeCliente);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FrmChatCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // Configurar a interface com o nome do cliente
         lblNomeUser.setText(nomeCliente);
-    }
-    
-     private void enviarMensagem() {
-        try {
-            String mensagem = txtMensagem.getText().trim();
-            if (!mensagem.isEmpty()) {
-                chat.enviarMensagem(nomeCliente, mensagem);
-                txtMensagem.setText(""); // Limpar campo de mensagem após o envio
-               // user.notificar(mensagem);
-                System.out.println(nomeCliente+ mensagem);
-            }
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            // Tratamento de erro ao enviar mensagem
-        }
-    }
-     
+    }  
 
     private void atualizarLista() {
         try {
@@ -269,8 +258,18 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviaActionPerformed
-        enviarMensagem();
-        
+        try {
+            String mensagem = txtMensagem.getText().trim();
+            if (!mensagem.isEmpty()) {
+                chat.enviarMensagem(nomeCliente, mensagem);
+                txtMensagem.setText(""); // Limpar campo de mensagem após o envio
+                // user.notificar(mensagem);
+                System.out.println("teste"+ nomeCliente+ mensagem);
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            // Tratamento de erro ao enviar mensagem
+        }        
     }//GEN-LAST:event_btnEnviaActionPerformed
 
     private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
@@ -279,9 +278,9 @@ class ClientListener extends UnicastRemoteObject implements InterfaceCliente{
     }//GEN-LAST:event_btnDesconectarActionPerformed
     private void desconectarCliente() {
         try {
-            chat.desconectarCliente(user);
+            chat.desconectarCliente(userIF);
             this.dispose();
-            System.out.println("O cliente "+user+" se desconectou.");
+            System.out.println("O cliente "+userIF.getNome()+" se desconectou.");
 
         } catch (RemoteException e) {
             e.printStackTrace();
